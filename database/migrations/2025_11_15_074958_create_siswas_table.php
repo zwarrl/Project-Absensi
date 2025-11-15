@@ -8,14 +8,15 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('siswa', function (Blueprint $table) {
-            $table->string('nis')->unique();
-            $table->string('nama');
-            $table->string('kelas');
-            $table->string('jurusan')->nullable();
-            $table->string('jenis_kelamin');
-            $table->timestamps();
-        });
+       Schema::create('siswa', function (Blueprint $table) {
+    $table->string('nis')->primary();
+    $table->string('nama');
+    $table->string('kelas')->nullable();
+    $table->string('jurusan')->nullable();
+    $table->enum('jenis_kelamin', ['L', 'P'])->nullable();
+    $table->timestamps();
+});
+
     }
 
     public function down(): void

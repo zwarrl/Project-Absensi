@@ -9,17 +9,11 @@ class Absensi extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'siswa_id',
-        'tanggal',
-        'jam_masuk',
-        'jam_pulang',
-        'keterangan'
-    ];
+    protected $table = 'absensis';
+    protected $fillable = ['siswa_id', 'tanggal', 'jam_masuk', 'jam_pulang', 'keterangan'];
 
-    // Relasi ke Siswa
     public function siswa()
-    {
-        return $this->belongsTo(Siswa::class, 'siswa_id');
-    }
+{
+    return $this->belongsTo(Siswa::class, 'siswa_id', 'nis');
+}
 }

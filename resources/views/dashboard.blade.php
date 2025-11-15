@@ -104,7 +104,7 @@
                     <tbody>
                         @forelse($absensiHariIni as $absen)
                             <tr>
-                                <td>{{ $absen->nama }}</td>
+                                <td>{{ $absen->siswa->nama }}</td>
                                 <td>{{ \Carbon\Carbon::parse($absen->jam_masuk)->format('H:i') }}</td>
                                 <td>
                                     @if($absen->keterangan === 'Hadir')

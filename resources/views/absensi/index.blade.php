@@ -32,9 +32,9 @@
             </thead>
 
             <tbody>
-                @forelse ($data as $item)
+                @forelse ($absensi as $item)
                 <tr>
-                    <td>{{ $item->nama }}</td>
+                    <td>{{ $item->siswa->nama }}</td>
                     <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}</td>
                     <td>{{ $item->jam_masuk }}</td>
                     <td>{{ $item->jam_pulang ?? '-' }}</td>

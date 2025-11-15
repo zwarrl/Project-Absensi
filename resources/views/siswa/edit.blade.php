@@ -35,9 +35,9 @@
 
             <div class="mb-3">
                 <label>Jenis Kelamin</label>
-                <select name="jenis_kelamin" class="form-control">
-                    <option {{ $data->jenis_kelamin == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
-                    <option {{ $data->jenis_kelamin == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                <select name="jenis_kelamin" class="form-control" required>
+                    <option value="L" {{ $data->jenis_kelamin == 'L' ? 'selected' : '' }}>Laki-laki</option>
+                    <option value="P" {{ $data->jenis_kelamin == 'P' ? 'selected' : '' }}>Perempuan</option>
                 </select>
             </div>
 

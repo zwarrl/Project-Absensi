@@ -9,18 +9,23 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('absensis', function (Blueprint $table) {
-
-            $table->string('siswa_id'); // menyimpan NIS siswa
-            $table->foreign('siswa_id')->references('nis')->on('siswa')->onDelete('cascade');
+            $table->id();
+            
+            // Kolom siswa_id sebagai foreign key ke nis
+            $table->string('siswa_id');
+            
             $table->date('tanggal');
-            $table->time('jam_masuk');
+            $table->time('jam_masuk')->nullable();
             $table->time('jam_pulang')->nullable();
-            $table->string('keterangan');
-
-            // primary key gabungan: siswa_id + tanggal
-            $table->primary(['siswa_id', 'tanggal']);
-
+            $table->string('keterangan')->nullable(); // Hadir / Izin / Sakit / Alfa
+            
             $table->timestamps();
+
+            // Foreign key ke tabel siswa
+            $table->foreign('siswa_id')
+                  ->references('nis')
+                  ->on('siswa')
+                  ->onDelete('cascade');
         });
     }
 
