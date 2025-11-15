@@ -1,0 +1,32 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\AbsensiController;
+use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\DashboardController;
+
+// Attendance resource
+Route::resource('attendance', AttendanceController::class);
+
+// Auth routes
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/absensi', [AbsensiController::class, 'index'])->name('absensi.index');
+Route::get('/absensi/create', [AbsensiController::class, 'create'])->name('absensi.create');
+Route::post('/absensi', [AbsensiController::class, 'store'])->name('absensi.store');
+Route::get('/siswa', [SiswaController::class, 'index']);
+Route::get('/siswa/create', [SiswaController::class, 'create']);
+Route::post('/siswa', [SiswaController::class, 'store']);
+Route::get('/siswa/{nis}/edit', [SiswaController::class, 'edit']);
+Route::put('/siswa/{nis}', [SiswaController::class, 'update']);
+Route::delete('/siswa/{nis}', [SiswaController::class, 'destroy']);
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+
+// Home
+Route::get('/', function () {
+    return view('welcome');
+});
