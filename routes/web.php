@@ -6,7 +6,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\DashboardController;
-
+use App\Http\Controllers\AbsenPulangController;
 // Attendance resource
 Route::resource('attendance', AttendanceController::class);
 
@@ -14,9 +14,8 @@ Route::resource('attendance', AttendanceController::class);
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('/absensi', [AbsensiController::class, 'index'])->name('absensi.index');
-Route::get('/absensi/create', [AbsensiController::class, 'create'])->name('absensi.create');
-Route::post('/absensi', [AbsensiController::class, 'store'])->name('absensi.store');
+Route::resource('absensi', AbsensiController::class);
+Route::resource('absen_pulang', AbsenPulangController::class);
 Route::get('/siswa', [SiswaController::class, 'index']);
 Route::get('/siswa/create', [SiswaController::class, 'create']);
 Route::post('/siswa', [SiswaController::class, 'store']);
@@ -30,3 +29,5 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::get('/', function () {
     return view('welcome');
 });
+
+

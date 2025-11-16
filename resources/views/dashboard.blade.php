@@ -20,7 +20,7 @@
             position: fixed;
             width: 250px;
         }
-        .sidebar a {
+        .sidebar a, .sidebar button {
             color: white;
             text-decoration: none;
             display: block;
@@ -28,9 +28,14 @@
             margin-bottom: 10px;
             border-radius: 5px;
             transition: background 0.3s;
+            width: 100%;
+            text-align: left;
+            border: none;
+            background: transparent;
         }
-        .sidebar a:hover {
+        .sidebar a:hover, .sidebar button:hover {
             background: rgba(255,255,255,0.2);
+            cursor: pointer;
         }
         .content {
             margin-left: 270px;
@@ -42,6 +47,10 @@
         .card-stat:hover {
             transform: translateY(-5px);
         }
+        form.logout-form {
+            margin: 0;
+            padding: 0;
+        }
     </style>
 </head>
 <body>
@@ -51,14 +60,17 @@
         <h3 class="fw-bold mb-4">AbsensiKu</h3>
 
         <a href="{{ route('dashboard') }}">📊 Dashboard</a>
-        <a href="/absensi">📝 Absensi</a>
+        <a href="/absensi">📝 Absen Masuk</a>
         <a href="/siswa">👥 Data Siswa</a>
-        <a href="#">📄 Laporan</a>
-        <a href="#">⚙️ Pengaturan</a>
+        <a href="absen_pulang">📄 Absen Pulang</a>
 
         <hr class="border-light">
 
-        <a href="/logout">🚪 Logout</a>
+        <!-- FIX LOGOUT → HARUS POST -->
+        <form action="{{ route('logout') }}" method="POST" class="logout-form">
+            @csrf
+            <button type="submit">🚪 Logout</button>
+        </form>
     </div>
 
     <!-- Content -->

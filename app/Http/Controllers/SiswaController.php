@@ -8,9 +8,10 @@ use App\Models\Siswa;
 class SiswaController extends Controller
 {
     // Tampilkan semua siswa
-    public function index()
+   public function index()
 {
-    $data = Siswa::orderBy('nama', 'asc')->get(); // urutkan nama
+    // Ambil semua data siswa
+    $data = Siswa::all();
     return view('siswa.index', compact('data'));
 }
 

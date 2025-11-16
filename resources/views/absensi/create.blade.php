@@ -7,7 +7,18 @@
     </div>
 
     <div class="card-body">
-        <form action="{{ route('absensi.store') }}" method="POST">
+        {{-- Menampilkan error validation --}}
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <form action="{{ route('absensi.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             {{-- Nama Siswa --}}
@@ -15,7 +26,7 @@
                 <label for="siswa_id" class="form-label">Nama Siswa</label>
                 <select name="siswa_id" id="siswa_id" class="form-control @error('siswa_id') is-invalid @enderror" required>
                     <option value="">-- Pilih Siswa --</option>
-                    @foreach($siswa as $s)
+                    @foreach ($siswa as $s)
                         <option value="{{ $s->nis }}" {{ old('siswa_id') == $s->nis ? 'selected' : '' }}>
                             {{ $s->nama }}
                         </option>
@@ -35,20 +46,12 @@
                 @enderror
             </div>
 
-            {{-- Jam Masuk --}}
+            {{-- Jam Masuk (nullable) --}}
             <div class="mb-3">
                 <label for="jam_masuk" class="form-label">Jam Masuk</label>
-                <input type="time" name="jam_masuk" id="jam_masuk" class="form-control @error('jam_masuk') is-invalid @enderror" value="{{ old('jam_masuk') }}" required>
+                <input type="time" name="jam_masuk" id="jam_masuk" class="form-control @error('jam_masuk') is-invalid @enderror" value="{{ old('jam_masuk') }}">
+                <small class="text-muted">Kosongkan jika keterangan Sakit, Izin, atau Alpha</small>
                 @error('jam_masuk')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-
-            {{-- Jam Pulang --}}
-            <div class="mb-3">
-                <label for="jam_pulang" class="form-label">Jam Pulang</label>
-                <input type="time" name="jam_pulang" id="jam_pulang" class="form-control @error('jam_pulang') is-invalid @enderror" value="{{ old('jam_pulang') }}">
-                @error('jam_pulang')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
@@ -67,9 +70,45 @@
                 @enderror
             </div>
 
+            {{-- Upload Foto --}}
+            <div class="mb-3">
+                <label for="foto" class="form-label">Ambil Foto</label>
+                <input type="file" 
+                       name="foto" 
+                       id="foto" 
+                       accept="image/*" 
+                       capture="environment" 
+                       class="form-control @error('foto') is-invalid @enderror"
+                       onchange="previewFoto(event)">
+                @error('foto')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+
+                {{-- Preview Foto --}}
+                <div class="mt-2">
+                    <img id="preview-image" src="#" alt="Preview Foto" style="display:none; max-width:150px; border-radius:5px;">
+                </div>
+            </div>
+
             <button type="submit" class="btn btn-success">Simpan</button>
             <a href="{{ route('absensi.index') }}" class="btn btn-secondary">Kembali</a>
         </form>
     </div>
 </div>
+
+{{-- Script Preview Foto --}}
+<script>
+function previewFoto(event) {
+    const preview = document.getElementById('preview-image');
+    const file = event.target.files[0];
+
+    if(file){
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = "block";
+    } else {
+        preview.src = "";
+        preview.style.display = "none";
+    }
+}
+</script>
 @endsection
