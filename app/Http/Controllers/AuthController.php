@@ -4,36 +4,59 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class AuthController extends Controller
 {
-    public function showLogin()
-    {
-        return view('login'); // arahkan ke login.blade.php
+    /**
+     * Menampilkan halaman login
+     */
+    public function login(Request $request)
+{
+    $credentials = $request->only('username', 'password');
+
+    if (Auth::attempt($credentials)) {
+
+        return redirect()->route('dashboard'); // ⬅ Redirect ada di sini!
     }
 
-    public function login(Request $request)
+    return back()->withErrors([
+        'username' => 'Username atau password salah'
+    ]);
+}
+
+    public function loginProcess(Request $request)
     {
         $request->validate([
             'username' => 'required',
             'password' => 'required',
         ]);
 
-        $user = User::where('username', $request->username)->first();
+        $credentials = $request->only('username', 'password');
 
-        if ($user && Hash::check($request->password, $user->password)) {
-            Auth::login($user);
-            return redirect()->intended('/dashboard');
+        // Lakukan login dengan Auth::attempt()
+        if (Auth::attempt($credentials)) {
+
+            $request->session()->regenerate();
+
+            // Redirect langsung ke dashboard (DashboardController akan membagi role)
+            return redirect()->route('dashboard');
         }
 
-        return back()->withErrors(['username' => 'Username atau password salah']);
+        return back()->withErrors([
+            'login' => 'Username atau password salah!'
+        ]);
     }
 
-    public function logout()
+    /**
+     * Logout
+     */
+    public function logout(Request $request)
     {
         Auth::logout();
-        return redirect('/login');
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login');
     }
 }
