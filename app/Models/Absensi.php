@@ -10,6 +10,7 @@ class Absensi extends Model
     protected $table = 'absensis'; // <-- pastikan nama tabel sesuai migration
     protected $fillable = [
     'siswa_id',
+    'asal_sekolah',
     'tanggal',
     'jam_masuk',
     'jam_pulang',

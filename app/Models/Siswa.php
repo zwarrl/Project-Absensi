@@ -16,6 +16,6 @@ class Siswa extends Model
     protected $keyType = 'string';
 
     protected $fillable = [
-        'nis', 'nama', 'kelas', 'jurusan', 'jenis_kelamin'
+        'nis', 'nama', 'asal_sekolah', 'kelas', 'jurusan', 'jenis_kelamin'
     ];
 }

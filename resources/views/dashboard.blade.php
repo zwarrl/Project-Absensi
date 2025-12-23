@@ -92,12 +92,6 @@
                     <h2 class="text-success fw-bold">{{ $hadirHariIni }}</h2>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card p-4 shadow-sm card-stat">
-                    <h6 class="text-muted">Terlambat</h6>
-                    <h2 class="text-danger fw-bold">{{ $terlambatHariIni }}</h2>
-                </div>
-            </div>
         </div>
 
         <!-- Riwayat Absensi -->

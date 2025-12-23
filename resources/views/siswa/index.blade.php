@@ -20,6 +20,7 @@
                         <tr>
                             <th>NIS</th>
                             <th>Nama</th>
+                            <th>Asal Sekolah</th>
                             <th>Kelas</th>
                             <th>Jurusan</th>
                             <th>Jenis Kelamin</th>
@@ -31,6 +32,7 @@
                             <tr>
                                 <td>{{ $item->nis }}</td>
                                 <td>{{ $item->nama }}</td>
+                                <td>{{ $item->asal_sekolah }}</td>
                                 <td>{{ $item->kelas ?? '-' }}</td>
                                 <td>{{ $item->jurusan ?? '-' }}</td>
                                 <td>

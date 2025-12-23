@@ -23,6 +23,11 @@
             </div>
 
             <div class="mb-3">
+                <label for="nama">Asal Sekolah</label>
+                <input type="text" name="asal_sekolah" id="asal_sekolah" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
                 <label for="kelas">Kelas</label>
                 <input type="text" name="kelas" id="kelas" class="form-control">
             </div>

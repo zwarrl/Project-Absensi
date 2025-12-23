@@ -37,6 +37,24 @@
                 @enderror
             </div>
 
+            {{-- Asal Sekolah --}}
+<div class="mb-3">
+    <label for="asal_sekolah" class="form-label">Asal Sekolah</label>
+    <input
+        type="text"
+        name="asal_sekolah"
+        id="asal_sekolah"
+        class="form-control @error('asal_sekolah') is-invalid @enderror"
+        placeholder="Masukkan asal sekolah"
+        value="{{ old('asal_sekolah') }}"
+        required
+    >
+
+    @error('asal_sekolah')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
+
             {{-- Tanggal --}}
             <div class="mb-3">
                 <label for="tanggal" class="form-label">Tanggal</label>

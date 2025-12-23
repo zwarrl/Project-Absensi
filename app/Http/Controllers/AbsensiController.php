@@ -26,6 +26,7 @@ class AbsensiController extends Controller
     {
         $validated = $request->validate([
             'siswa_id'   => 'required|exists:siswa,nis',
+            'asal_sekolah' => 'required|string|max:100',
             'tanggal'    => 'required|date',
             'jam_masuk'  => 'required_if:keterangan,Hadir',
             'jam_pulang' => 'nullable',
@@ -52,6 +53,7 @@ class AbsensiController extends Controller
     {
         $validated = $request->validate([
             'siswa_id'   => 'required|exists:siswa,nis',
+            'asal_sekolah' => 'required|string|max:100',
             'tanggal'    => 'required|date',
             'jam_masuk'  => 'required_if:keterangan,Hadir',
             'jam_pulang' => 'nullable',

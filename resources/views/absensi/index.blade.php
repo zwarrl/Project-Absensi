@@ -24,6 +24,7 @@
                     <tr>
                         <th>Foto</th>
                         <th>Nama</th>
+                        <th>asal_sekolah</th>
                         <th>Tanggal</th>
                         <th>Jam Masuk</th>
                         <th>Keterangan</th>
@@ -47,6 +48,7 @@
 
                         {{-- Data --}}
                         <td>{{ $item->siswa->nama }}</td>
+                        <td>{{ $item->asal_sekolah }}</td>
                         <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}</td>
                         <td>{{ $item->jam_masuk }}</td>
                         <td>{{ $item->keterangan }}</td>

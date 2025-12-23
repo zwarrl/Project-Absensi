@@ -28,12 +28,13 @@ class SiswaController extends Controller
         $request->validate([
             'nis' => 'required|unique:siswa,nis',
             'nama' => 'required|string|max:100',
+            'asal_sekolah' => 'required|string|max:100',
             'kelas' => 'nullable|string|max:10',
             'jurusan' => 'nullable|string|max:50',
             'jenis_kelamin' => 'required|in:L,P'
         ]);
 
-        Siswa::create($request->only('nis', 'nama', 'kelas', 'jurusan', 'jenis_kelamin'));
+        Siswa::create($request->only('nis', 'nama', 'asal_sekolah', 'kelas', 'jurusan', 'jenis_kelamin'));
 
         return redirect('/siswa')->with('success', 'Data siswa berhasil ditambahkan!');
     }
@@ -46,20 +47,29 @@ class SiswaController extends Controller
     }
 
     // Update data siswa
-    public function update(Request $request, $nis)
-    {
-        $request->validate([
-            'nama' => 'required|string|max:100',
-            'kelas' => 'nullable|string|max:10',
-            'jurusan' => 'nullable|string|max:50',
-            'jenis_kelamin' => 'required|in:L,P'
-        ]);
+   public function update(Request $request, $nis)
+{
+    $request->validate([
+        'nama' => 'required|string|max:100',
+        'asal_sekolah' => 'required|string|max:100', // WAJIB DITAMBAHKAN
+        'kelas' => 'nullable|string|max:10',
+        'jurusan' => 'nullable|string|max:50',
+        'jenis_kelamin' => 'required|in:L,P'
+    ]);
 
-        $data = Siswa::findOrFail($nis);
-        $data->update($request->only('nama', 'kelas', 'jurusan', 'jenis_kelamin'));
+    $data = Siswa::findOrFail($nis);
 
-        return redirect('/siswa')->with('success', 'Data siswa berhasil diperbarui!');
-    }
+    $data->update([
+        'nama' => $request->nama,
+        'asal_sekolah' => $request->asal_sekolah, // WAJIB DITAMBAHKAN
+        'kelas' => $request->kelas,
+        'jurusan' => $request->jurusan,
+        'jenis_kelamin' => $request->jenis_kelamin
+    ]);
+
+    return redirect('/siswa')->with('success', 'Data siswa berhasil diperbarui!');
+}
+
 
     // Hapus data siswa
     public function destroy($nis)
