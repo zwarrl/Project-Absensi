@@ -13,6 +13,7 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+        dd($request->all());
         $credentials = $request->only('username', 'password');
 
         if (Auth::attempt($credentials)) {
